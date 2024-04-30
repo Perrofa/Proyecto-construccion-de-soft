@@ -67,13 +67,6 @@
             Riesgos
           </a>
         </li>
-        <li>
-            <li class="nav-item">
-                <a href="resumen.html" class="nav-link link-body-emphasis" id="resumen-link">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-            Resumen
-          </a>
-        </li>
         <li class="nav-item">
           <a href="ayuda.html" class="nav-link link-body-emphasis" id="ayuda-link">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
@@ -96,7 +89,8 @@
     </div>
 
     <div class="container">
-      <h1>Registrar Riesgos</h1>
+      <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Riesgos</h2>
     
       <!-- Sección para mostrar y manejar los recuadros de riesgos -->
       <div id="riesgos-container">
@@ -106,16 +100,16 @@
       <!-- Formulario para agregar nuevos riesgos -->
       <form id="nuevo-riesgo-form">
         <div class="mb-3">
-          <label for="titulo-riesgo" class="form-label">Título del Riesgo</label>
-          <input type="text" class="form-control" id="titulo-riesgo" required>
+          <label for="titulo-riesgo" class="form-label">Título</label>
+          <input type="text" class="form-control" id="titulo-riesgo" placeholder="Titulo del riesgo" required>
         </div>
         <div class="mb-3">
-          <label for="fecha-riesgo" class="form-label">Fecha del Riesgo (dd/mm/aa)</label>
-          <input type="text" class="form-control" id="fecha-riesgo" placeholder="dd/mm/aa" required>
+          <label for="fecha-riesgo" class="form-label">Proyecto</label>
+          <input type="text" class="form-control" id="fecha-riesgo" placeholder="Selecciona el proyecto origen del riesgo" required>
         </div>
         <div class="mb-3">
-          <label for="descripcion-riesgo" class="form-label">Descripción del Riesgo</label>
-          <textarea class="form-control" id="descripcion-riesgo" rows="3" required></textarea>
+          <label for="descripcion-riesgo" class="form-label">Descripción</label>
+          <textarea class="form-control" id="descripcion-riesgo" rows="3" placeholder="Escribe una breve descripción del riesgo" required></textarea>
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="prioridad-riesgo">
@@ -144,10 +138,6 @@
   document.getElementById("proyectos-link").addEventListener("click", function(event) {
     event.preventDefault(); 
     window.location.href = "proyectos.html";
-  });
-  document.getElementById("resumen-link").addEventListener("click", function(event) {
-    event.preventDefault(); 
-    window.location.href = "resumen.html";
   });
   document.getElementById("perfil-link").addEventListener("click", function(event) {
     event.preventDefault(); 
