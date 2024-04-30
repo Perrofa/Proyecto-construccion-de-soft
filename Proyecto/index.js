@@ -1,8 +1,8 @@
-const http = require('http');
+const http    = require('http');
 const express = require('express');
-const path = require('path');
+const path    = require('path');
 const fs      = require('fs');
-const app = express();
+const app     = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -12,11 +12,17 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (request, response, next) => {
-    response.render('index');
+    response.setHeader('Content-Type', 'text/plain');
+    response.send("Hola Mundo");
+    response.end(); 
+});
+
+app.get('/test_ejs', (request, response, next) => {
+    response.render('index',); 
 });
 
 const server = http.createServer( (request, response) => {    
     console.log(request.url);
 });
 
-server.listen(3000);
+app.listen(3000);
