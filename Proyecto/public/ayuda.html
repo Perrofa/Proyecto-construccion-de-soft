@@ -66,12 +66,6 @@
             Riesgos
           </a>
         </li>
-        <li>
-          <a href="#" class="nav-link link-body-emphasis" id="resumen-link">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-            Resumen
-          </a>
-        </li>
         <li class="nav-item">
           <a href="ayuda.html" class="nav-link active" aria-current="page" id="ayuda-link">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
@@ -94,8 +88,8 @@
     </div>
 
     <div class="container">
-      <h1>Pagina en construccion..</h1>
-      <h2>Interfaz 5</h2>
+      <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Ayuda</h2>
     </div>
   </main>
 
@@ -111,10 +105,6 @@
   document.getElementById("proyectos-link").addEventListener("click", function(event) {
     event.preventDefault(); 
     window.location.href = "proyectos.html";
-  });
-  document.getElementById("resumen-link").addEventListener("click", function(event) {
-    event.preventDefault(); 
-    window.location.href = "resumen.html";
   });
   document.getElementById("riesgos-link").addEventListener("click", function(event) {
     event.preventDefault(); 
