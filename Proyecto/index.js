@@ -1,6 +1,7 @@
 const http = require('http');
 const express = require('express');
 const path = require('path');
+const fs      = require('fs');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -11,9 +12,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (request, response, next) => {
-    response.setHeader('Content-Type', 'text/plain');
-    response.send("Hola Mundo");
-    response.end(); 
+    response.render('index');
+});
+
+const server = http.createServer( (request, response) => {    
+    console.log(request.url);
 });
 
 server.listen(3000);
