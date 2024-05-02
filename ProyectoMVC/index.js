@@ -22,10 +22,9 @@ app.get('/', (request, response, next) => {
     response.end(); 
 });
 
-// render dir
-app.get('/apix', (rerequest, response, next) => {
-    response.render('index')
-});
+// carga de las rutas en la carpeta routes
+const rutasAppix = require('./routes/appix.routes');
+app.use('/appix', rutasAppix);
 
 // apertura del servidor
 const server = http.createServer( (request, response) => {    
