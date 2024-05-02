@@ -22,9 +22,10 @@ app.get('/', (request, response, next) => {
     response.end(); 
 });
 
-// obtencion de las rutas de la app
-const rutasApp = require('./routes/app.routes');
-app.use('/apix', rutasApp);
+// render dir
+app.get('/apix', (rerequest, response, next) => {
+    response.render('index')
+});
 
 // apertura del servidor
 const server = http.createServer( (request, response) => {    
