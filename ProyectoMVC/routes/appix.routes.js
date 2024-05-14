@@ -5,6 +5,11 @@ const { request } = require('http');
 const router = express.Router();
 const controller = require("../controllers/appix.controller.js");
 
-router.get('/Sign-In', controller.index);
+router.get('/sign_in', controller.sign_in);
+router.get('/inicio', controller.inicio);
+router.get('/perfil', controller.perfil);
+router.get('/proyectos', controller.proyectos);
+router.get('/riesgos', controller.riesgos);
+router.get('/ayuda', controller.ayuda);
 
 module.exports = router;
