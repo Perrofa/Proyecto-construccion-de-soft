@@ -12,4 +12,9 @@ router.get('/proyectos', controller.proyectos);
 router.get('/riesgos', controller.riesgos);
 router.get('/ayuda', controller.ayuda);
 
+router.get('/registro', controller.get_registro);
+router.post('/registro', controller.post_registro);
+//router.get('/login', controller.get_login);
+//router.post('/login', controller.post_login);
+
 module.exports = router;
