@@ -65,6 +65,11 @@ module.exports.post_login = async(req,res) =>{
 */
 
 module.exports.get_usuarios = async(req, res) => {
-    const user = await model.get();
-    return res.status(200).json({ usuarios: user });
+    try {
+        const user = new model.Usuario();
+        const usuarios = await user.get();
+        return res.status(200).json({ usuarios:usuarios });
+    } catch(error) {
+        console.error('Error:', error);
+    }
 };

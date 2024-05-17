@@ -35,8 +35,22 @@ exports.Usuario = class {
             throw error; 
         }
     }
+
+    async get() {
+        try {
+            const connection = await db();
+            const usuarios = await connection.execute('SELECT * FROM usuario');
+            await connection.release();
+            console.log(usuarios);
+            return usuarios;
+        } catch {
+            console.error('Error executing query:', error);
+            throw error;
+        }
+    }
 }
 
+/*
 const get = async() => {
     try {
         const connection = await db();
@@ -53,5 +67,4 @@ const get = async() => {
         throw error;
     }
 }
-
-module.exports = {get};
+*/

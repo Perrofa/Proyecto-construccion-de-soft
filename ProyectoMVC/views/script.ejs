@@ -4,9 +4,16 @@
         pagination: true,
         search: true,
         sort: true,
-        server:{
+        server: {
             url: "/usuarios/usuarios",
-            then: data => data.usuarios
+            then: data => data.usuarios.map( usuario => [usuario.UserID, usuario.NomUsuario, usuario.ContraUsuario, usuario.ContraUsuario, usuario.PrivUsuario])
         }
+        //data: [
+        //    ["1", "John",  "amlo", "john@example.com", "(353) 01 222 3333"],
+        //    ["2", "Mark",  "amlo", "mark@gmail.com", "(01) 22 888 4444"],
+        //    ["3", "Eoin",  "amlo", "eoin@gmail.com", "0097 22 654 00033"],
+        //    ["4", "Sarah", "amlo",  "sarahcdd@gmail.com", "+322 876 1233"],
+        //    ["5", "Afshin","amlo",  "afshin@mail.com", "(353) 22 87 8356"]
+        //]
     }).render(document.getElementById("wrapper"));
 </script>

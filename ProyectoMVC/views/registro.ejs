@@ -8,21 +8,31 @@
     <body>
         <h2 class="title"> Registro </h2>
         <form action="/usuarios/registro" method="POST">
-            <label class="label" for="id">ID</label>
-            <input class="input text" id="id" name="id">
+            <p>
+                <label class="label" for="id">ID</label>
+                <input class="input text" id="id" name="id">
+            </p>
+            
+            <p>
+                <label class="label" for="nombre">Nombre de usuario</label>
+                <input class="input text" id="nombre" name="nombre">
+            </p>
+            
+            <p>
+                <label class="label" for="pass">Contraseña</label>
+                <input class="input text" id="pass" name="pass">
+            </p>
 
-            <label class="label" for="nombre">Nombre de usuario</label>
-            <input class="input text" id="nombre" name="nombre">
+            <p>
+                <label class="label" for="mail">Correo</label>
+                <input class="input text" id="mail" name="mail">
+            </p>
+            
+            <p>
+                <label class="label" for="priv">Privilegio</label>
+                <input class="input text" id="priv" name="priv">
+            </p>
 
-            <label class="label" for="pass">Contraseña</label>
-            <input class="input text" id="pass" name="pass">
-
-            <label class="label" for="mail">Correo</label>
-            <input class="input text" id="mail" name="mail">
-
-            <label class="label" for="priv">Privilegio</label>
-            <input class="input text" id="priv" name="priv">
-            <br><br>
             <input class="button is-success" type="submit" value="registrar">
         </form>
         <div id="wrapper"></div>
