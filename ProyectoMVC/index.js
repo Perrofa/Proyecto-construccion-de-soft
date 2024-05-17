@@ -59,9 +59,23 @@ app.get('/test_db', async(request, response, next) => {
     }
 });
 
-// carga de las rutas en la carpeta routes
-const rutasAppix = require('./routes/appix.routes');
+// carga de las rutas de la aplicacion
+const rutasAppix = require('./routes/appix.routes.js');
 app.use('/appix', rutasAppix);
+
+// carga de las rutas de usuarios
+const rutasUsuarios = require('./routes/usuarios.routes.js');
+app.use('/usuarios', rutasUsuarios);
+
+/*
+// carga de las rutas de proyectos
+const rutasProyectos = require('./routes/proyectos.routes');
+app.use('/proyectos', rutasProyectos);
+
+// carga de las rutas de la riesgos
+const rutasRiesgos = require('./routes/riesgos.routes');
+app.use('/riesgos', rutasRiesgos);
+*/
 
 // apertura del servidor
 const server = http.createServer( (request, response) => {    
