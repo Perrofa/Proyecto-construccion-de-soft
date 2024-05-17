@@ -2,7 +2,7 @@
 const model = require('./../models/usuarios_model.js');
 
 module.exports.get_registro = async(req, res) =>{
-    res.render("./registro");
+    res.render("./usuarios/registro/registro");
 }
 
 module.exports.post_registro = async(req,res) =>{
