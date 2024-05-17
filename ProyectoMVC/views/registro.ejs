@@ -1,4 +1,10 @@
 <html>
+    <head>
+        <link
+          href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+          rel="stylesheet"
+        />
+    </head>
     <body>
         <h2 class="title"> Registro </h2>
         <form action="/usuarios/registro" method="POST">
@@ -19,5 +25,8 @@
             <br><br>
             <input class="button is-success" type="submit" value="registrar">
         </form>
+        <div id="wrapper"></div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    <%- include('./script.ejs') %>
 </html>

@@ -11,4 +11,6 @@ router.post('/registro', controller.post_registro);
 //router.get('/login', controller.get_login);
 //router.post('/login', controller.post_login);
 
+router.get('/usuarios', controller.get_usuarios);
+
 module.exports = router;

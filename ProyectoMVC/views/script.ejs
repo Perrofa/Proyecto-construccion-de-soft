@@ -1,0 +1,12 @@
+<script>
+    new gridjs.Grid({
+        columns: ["ID", "Nombre", "Contraseña", "Correo", "Priv"],
+        pagination: true,
+        search: true,
+        sort: true,
+        server:{
+            url: "/usuarios/usuarios",
+            then: data => data.usuarios
+        }
+    }).render(document.getElementById("wrapper"));
+</script>
