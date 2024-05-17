@@ -71,11 +71,6 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link link-body-emphasis" id="ayuda-link">
-              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-              Ayuda
-            </a>
-          </li>
         </ul>
         <hr>
         <div
@@ -111,7 +106,6 @@
                   <h5 class="my-3">Ricardo Cortés</h5>
                   <p class="text-muted mb-1">Full Stack Developer</p>
                   <div class="d-flex justify-content-center mb-2">
-                    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Permisos</button>
                     <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1" href="#" id="registro-link">Registrar Usuario</button>
                   </div>
                 </div>
@@ -177,6 +171,22 @@
           </div>
         </div>
     </main>
+            <!-- Footer -->
+
+            <div class="container">
+              <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                  <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+                  </a>
+                  <span class="mb-3 mb-md-0 text-body-secondary text-nowrap">Contáctanos: a01710879@tec.mx, a0171016@tec.mx, a01612348@tec.mx </span>
+                </div>
+            
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                  <img src="/images/LogoAppix.png" width="55" height="45"li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"></use></svg></a></li>
+                </ul>
+              </footer>
+            </div>
 
       <!-- Funciones con ID para navegar entre las interfaces -->
   
@@ -187,10 +197,6 @@
         event.preventDefault(); 
         window.location.href = "inicio";
     });
-      document.getElementById("ayuda-link").addEventListener("click", function(event) {
-        event.preventDefault(); 
-        window.location.href = "ayuda";
-      });
       document.getElementById("proyectos-link").addEventListener("click", function(event) {
         event.preventDefault(); 
         window.location.href = "proyectos";

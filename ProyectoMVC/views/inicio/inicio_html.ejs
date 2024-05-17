@@ -69,11 +69,6 @@
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link link-body-emphasis" id="ayuda-link">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-            Ayuda
-          </a>
-        </li>
       </ul>
       <hr>
       <div
@@ -117,7 +112,7 @@
           <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
           <div class="container">
             <div class="carousel-caption text-end">
-              <h1>Visualiza el nivel de riesgo de cada proyecto.</h1>
+              <h1>Visualiza riesgos de tus proyectos.</h1>
             </div>
           </div>
         </div>
@@ -140,34 +135,42 @@
         <h2 class="fw-normal">Resumen</h2>
         <p>Consulta un resumen de tus proyectos mas recientes.</p>
         <p><a class="btn btn-secondary" href="#">Ver »</a></p>
-      </div><!-- /.col-lg-4 -->
+      </div>
       <div class="col-lg-4">
         <img src="/images/duedate.png" svg class="bd-placeholder-img" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
         <h2 class="fw-normal">Por Terminar</h2>
         <p>Consulta tus proyectos cerca de la fecha limite.</p>
         <p><a class="btn btn-secondary" href="#">Ver »</a></p>
-      </div><!-- /.col-lg-4 -->
+      </div>
       <div class="col-lg-4">
         <img src="/images/altoriesgo.png" svg class="bd-placeholder-img" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
         <h2 class="fw-normal">Estadisticas de Riesgo</h2>
         <p>Consulta tus proyectos con mas riesgos.</p>
         <p><a class="btn btn-secondary" href="#">Ver »</a></p>
-      </div><!-- /.col-lg-4 -->
+      </div>
     </div>
-    
-    
-
   </main>
+
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary text-nowrap">Contáctanos: a01710879@tec.mx, a0171016@tec.mx, a01612348@tec.mx </span>
+      </div>
+  
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <img src="/images/LogoAppix.png" width="55" height="45"li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"></use></svg></a></li>
+      </ul>
+    </footer>
+  </div>
 
     <!-- Funciones con ID para navegar entre las interfaces -->
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
-  document.getElementById("ayuda-link").addEventListener("click", function(event) {
-    event.preventDefault(); 
-    window.location.href = "ayuda";
-  });
   document.getElementById("proyectos-link").addEventListener("click", function(event) {
     event.preventDefault(); 
     window.location.href = "proyectos";

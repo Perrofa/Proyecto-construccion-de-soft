@@ -68,12 +68,6 @@
           </a>
         </li>
         <li>
-        <li class="nav-item">
-          <a href="ayuda.html" class="nav-link link-body-emphasis" id="ayuda-link">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-            Ayuda
-          </a>
-        </li>
       </ul>
       <hr>
       <div
@@ -154,6 +148,22 @@
                       <small>13/12/23</small>
     </div>
   </main>
+          <!-- Footer -->
+
+          <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+              <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                  <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary text-nowrap">Contáctanos: a01710879@tec.mx, a0171016@tec.mx, a01612348@tec.mx </span>
+              </div>
+          
+              <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <img src="/images/LogoAppix.png" width="55" height="45"li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"></use></svg></a></li>
+              </ul>
+            </footer>
+          </div>
 
   <!-- Funciones con ID para navegar entre las interfaces -->
 
@@ -163,10 +173,6 @@
     document.getElementById("inicio-link").addEventListener("click", function(event) {
     event.preventDefault(); 
     window.location.href = "inicio";
-  });
-  document.getElementById("ayuda-link").addEventListener("click", function(event) {
-    event.preventDefault(); 
-    window.location.href = "ayuda";
   });
   document.getElementById("riesgos-link").addEventListener("click", function(event) {
     event.preventDefault(); 
