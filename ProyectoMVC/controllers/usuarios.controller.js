@@ -63,3 +63,8 @@ module.exports.post_login = async(req,res) =>{
     }        
 }
 */
+
+module.exports.get_usuarios = async(req, res) => {
+    const user = await model.get();
+    return res.status(200).json({ usuarios: user });
+};

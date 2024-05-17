@@ -37,4 +37,21 @@ exports.Usuario = class {
     }
 }
 
+const get = async() => {
+    try {
+        const connection = await db();
+        const [rows] = await connection.query('SELECT * FROM usuario');
+        const usuarios = rows.map(row => ({
+            id: row.UserID,
+            nombre: row.NomUsuario,
+            contra: row.ContraUsuario,
+            correo: row.MailUsuario,
+            priv: row.PrivUsuario
+        }));
+        return usuarios;
+    } catch (error) {
+        throw error;
+    }
+}
 
+module.exports = {get};
