@@ -48,6 +48,21 @@ exports.Usuario = class {
             throw error;
         }
     }
+
+    async get_NomUsuarios() {
+        try {
+            const connection = await db();
+            const usuarios = await connection.execute('SELECT NomUsuario FROM usuario');
+            await connection.release();
+            console.log(usuarios);
+            return usuarios;
+        } catch {
+            console.error('Error executing query:', error);
+            throw error;
+        }
+    }
+
+
 }
 
 /*

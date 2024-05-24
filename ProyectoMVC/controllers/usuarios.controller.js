@@ -73,3 +73,13 @@ module.exports.get_usuarios = async(req, res) => {
         console.error('Error:', error);
     }
 };
+
+module.exports.get_Nombre = async(req, res) => {
+    try {
+        const user = new model.Usuario();
+        const usuarios = await user.get_NomUsuarios();
+        return res.status(200).json({ usuarios:usuarios });
+    } catch(error) {
+        console.error('Error:', error);
+    }
+};
