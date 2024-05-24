@@ -25,13 +25,14 @@ exports.Usuario = class {
         }
     }
 
-    static async find(nombre) {
+    async find(nombre) {
         try {
             const connection = await db();
             const result = await connection.execute('Select * from usuario WHERE NomUsuario = ?', [nombre]);
             await connection.release();
             return result;
         } catch (error) {
+            console.error('Error executing query:', error);
             throw error; 
         }
     }

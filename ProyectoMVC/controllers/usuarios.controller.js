@@ -93,3 +93,18 @@ module.exports.get_Contra = async(req, res) => {
         console.error('Error:', error);
     }
 };
+
+module.exports.find = async(req, res) => {
+    try {
+        const nombre = 'lalo';
+        const user = new model.Usuario();
+        const usuarios = await user.find(nombre);
+        if (usuarios.length === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        return res.status(200).json({ usuarios:usuarios });
+    } catch(error) {
+        console.error('Error:', error);
+        return res.status(500).json({ error: 'Error al obtener el usuario' });
+    }
+};

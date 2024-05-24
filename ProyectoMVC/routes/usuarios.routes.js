@@ -14,6 +14,7 @@ router.post('/registro', controller.post_registro);
 router.get('/usuarios', controller.get_usuarios);
 router.get('/nombre', controller.get_Nombre);
 router.get('/contra', controller.get_Contra);
+router.get('/encontrar', controller.find);
 
 
 module.exports = router;
