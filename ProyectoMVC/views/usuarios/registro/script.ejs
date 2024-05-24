@@ -6,7 +6,7 @@
         sort: true,
         server: {
             url: "/usuarios/usuarios",
-            then: data => data.usuarios.map( usuario => [usuario.UserID, usuario.NomUsuario, usuario.ContraUsuario, usuario.ContraUsuario, usuario.PrivUsuario])
+            then: data => data.usuarios.map( usuario => [usuario.UserID, usuario.NomUsuario, usuario.ContraUsuario, usuario.MailUsuario, usuario.PrivUsuario])
         }
         //data: [
         //    ["1", "John",  "amlo", "john@example.com", "(353) 01 222 3333"],
