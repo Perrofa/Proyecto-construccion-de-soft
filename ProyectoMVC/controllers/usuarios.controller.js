@@ -83,3 +83,13 @@ module.exports.get_Nombre = async(req, res) => {
         console.error('Error:', error);
     }
 };
+
+module.exports.get_Contra = async(req, res) => {
+    try {
+        const user = new model.Usuario();
+        const usuarios = await user.get_ContraUsuario();
+        return res.status(200).json({ usuarios:usuarios });
+    } catch(error) {
+        console.error('Error:', error);
+    }
+};

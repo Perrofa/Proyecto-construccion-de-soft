@@ -62,6 +62,19 @@ exports.Usuario = class {
         }
     }
 
+    async get_ContraUsuario() {
+        try {
+            const connection = await db();
+            const usuarios = await connection.execute('SELECT ContraUsuario FROM usuario');
+            await connection.release();
+            console.log(usuarios);
+            return usuarios;
+        } catch {
+            console.error('Error executing query:', error);
+            throw error;
+        }
+    }
+
 
 }
 

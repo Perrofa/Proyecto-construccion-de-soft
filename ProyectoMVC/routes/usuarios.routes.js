@@ -13,5 +13,7 @@ router.post('/registro', controller.post_registro);
 
 router.get('/usuarios', controller.get_usuarios);
 router.get('/nombre', controller.get_Nombre);
+router.get('/contra', controller.get_Contra);
+
 
 module.exports = router;
