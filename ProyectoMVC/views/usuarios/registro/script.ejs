@@ -1,19 +1,43 @@
 <script>
-    new gridjs.Grid({
-        columns: ["ID", "Nombre", "Contraseña", "Correo", "Priv"],
-        pagination: true,
-        search: true,
-        sort: true,
-        server: {
-            url: "/usuarios/usuarios",
-            then: data => data.usuarios.map( usuario => [usuario.UserID, usuario.NomUsuario, usuario.ContraUsuario, usuario.MailUsuario, usuario.PrivUsuario])
+    let flag = false;
+    let myGrid;
+
+    document.getElementById("ver-registro").addEventListener("click", function() {
+        event.preventDefault();
+        if(flag){
+            document.getElementById("wrapper").innerHTML = "";
+            this.textContent = "Mostrar usuarios";
+            this.id = "ver-registro";
+        } else {
+            myGrid = new gridjs.Grid({
+            columns: ["ID", "Nombre", "Contraseña", "Correo", "Priv"],
+            pagination: true,
+            search: true,
+            sort: true,
+            server: {
+                url: "/usuarios/usuarios",
+                then: data => data.usuarios.map( usuario => [usuario.UserID, usuario.NomUsuario, usuario.ContraUsuario, usuario.MailUsuario, usuario.PrivUsuario])
+            }
+            }).render(document.getElementById("wrapper"));
+
+            this.textContent = "Ocultar usuarios"
+            this.id = "ocultar-registro"
         }
-        //data: [
-        //    ["1", "John",  "amlo", "john@example.com", "(353) 01 222 3333"],
-        //    ["2", "Mark",  "amlo", "mark@gmail.com", "(01) 22 888 4444"],
-        //    ["3", "Eoin",  "amlo", "eoin@gmail.com", "0097 22 654 00033"],
-        //    ["4", "Sarah", "amlo",  "sarahcdd@gmail.com", "+322 876 1233"],
-        //    ["5", "Afshin","amlo",  "afshin@mail.com", "(353) 22 87 8356"]
-        //]
-    }).render(document.getElementById("wrapper"));
+        flag = !flag
+    });
+
+    // Prevent form submission on GridJS interaction
+    document.getElementById("registro-form").addEventListener("submit", function(event) {
+        if (event.submitter && event.submitter.id !== "ver-registro") {
+            return; // Allow form submission if the submit button is not "ver-registro"
+        }
+        event.preventDefault(); // Otherwise, prevent form submission
+    });
+
+    document.getElementById("wrapper").addEventListener("click", function(event) {
+        const registroForm = document.getElementById("registro-form");
+        if (registroForm.contains(event.target)) {
+            event.preventDefault();
+        }
+    });
 </script>

@@ -7,16 +7,15 @@ module.exports.get_registro = async(req, res) =>{
 
 module.exports.post_registro = async(req,res) =>{
     try {
-        const id = req.body.id;
         const name = req.body.nombre;
         const pass = req.body.pass;
         const mail = req.body.mail;
         const priv = req.body.priv;
     
-        const user = new model.Usuario(id, name, pass, mail, priv);
+        const user = new model.Usuario(name, pass, mail, priv);
         const savedUser = await user.save();
 
-        res.status(201).redirect("/appix/inicio");
+        res.status(201).redirect("/usuarios/registro");
     
     } catch (error) {
         console.error(error);

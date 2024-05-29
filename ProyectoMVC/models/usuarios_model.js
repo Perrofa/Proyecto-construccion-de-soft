@@ -2,8 +2,7 @@ const db = require('./../utils/database.js');
 
 exports.Usuario = class {
     // contructor de la clase usuario
-    constructor(my_id, my_name, my_pass, my_mail, my_priv){
-        this.id = my_id;
+    constructor(my_name, my_pass, my_mail, my_priv){
         this.name = my_name;
         this.pass = my_pass;
         this.mail = my_mail;
