@@ -63,19 +63,20 @@
               </div>
 
               <input class="btn btn-primary mb-3" type="submit" value="Registrar">
-    </form>
-    <button class="btn btn-secondary mb-3" type="button" id="ver-registro">Mostrar usuarios</button>
-  </div>
-  <div id="wrapper"></div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<%- include('./script.ejs') %>
-
-  <script>
-    document.getElementById("perfil-link").addEventListener("click", function (event) {
-      event.preventDefault();
+          </form>
+          <button class="btn btn-secondary mb-3" type="button" id="ver-registro">Mostrar usuarios</button>
+          <button class="btn btn-secondary mb-3" type="button" id="eliminar-usuario">Eliminar usuario</button>
+        </div>
+        <div id="eliminar-form"></div>
+        <div id="wrapper"></div>    
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <%- include('./script.ejs') %>
+    
+    <script>
+      document.getElementById("perfil-link").addEventListener("click", function(event) {
+      event.preventDefault(); 
       window.location.href = "/appix/perfil";
     });
   </script>
