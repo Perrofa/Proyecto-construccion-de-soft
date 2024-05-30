@@ -6,7 +6,7 @@
     
     <main class="d-flex flex-nowrap">
       <%- include('./../sidebar.ejs') %>
-
+    
       <div class="container">
         <div class="container px-4 py-5" id="custom-cards">
           <h2 class="pb-2 border-bottom">Registro</h2>
@@ -22,12 +22,36 @@
               <label for="descripcion-riesgo" class="form-label">Descripción del proyecto</label>
               <textarea class="form-control" id="descripcion-riesgo" rows="3" placeholder="Escribe una breve descripción del proyecto" required></textarea>
             </div>
+
+            <!-- Calendarios de Fecha Inicio-Fin -->
+            
+            <div class="mb-3">
+              <label for="fecha-inicio" class="form-label">Fecha de inicio</label>
+              <input type="date" class="form-control" id="fecha-inicio" required>
+            </div>
+    
+            <div class="mb-3">
+              <label for="fecha-fin" class="form-label">Fecha final</label>
+              <input type="date" class="form-control" id="fecha-fin" required>
+            </div>
             
             <button type="submit" class="btn btn-primary">Agregar Proyecto</button>
+            <button type="button" class="btn btn-secondary">Agregar Riesgo</button>
           </form>
         </div>
       </div>
     </main>
+    
+    <!-- Calendar -->
+    <div class="dropdown-menu d-block position-static p-2 mx-0 shadow rounded-3 w-340px" data-bs-theme="light">
+      <div class="d-grid gap-1">
+        <div class="cal">
+          <!-- Calendar content goes here -->
+          
+        </div>
+      </div>
+    </div>
+    
 
     <div class="container">
       <%- include('./../footer.ejs') %>
