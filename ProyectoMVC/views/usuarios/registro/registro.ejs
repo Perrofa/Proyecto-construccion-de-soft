@@ -49,10 +49,16 @@
                   <div class="mb-3">
                       <label for="mail" class="form-label">Correo</label>
                       <input type="text" class="form-control" id="mail" placeholder="Correo del usuario" name="mail" required>
-                  <div class="mb-3">
-                      <label for="priv" class="form-label">Privilegio</label>
-                      <input type="text" class="form-control" id="priv" placeholder="1-Admin   2-Desarrollador   3-Colaborador" name="priv" required>
-              </div>
+                      <div class="form-group mb-3">
+                        <label for="nivelRiesgo">Nivel:</label>
+                        <select class="form-control mb-3" name="nivelRiesgo" required>
+                          <option value="" disabled selected>Selecciona un nivel de privilegio</option>
+                          <option value="1">1 (Administrador)</option>
+                          <option value="2">2 (Desarrollador)</option>
+                          <option value="3">3 (Colaborador)</option>
+                        </select>
+                      </div>
+                      
               <input class="btn btn-primary mb-3" type="submit" value="Registrar">
           </form>
           <button class="btn btn-secondary mb-3" type="button" id="ver-registro">Mostrar usuarios</button>
