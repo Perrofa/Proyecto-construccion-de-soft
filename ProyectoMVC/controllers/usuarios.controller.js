@@ -95,15 +95,40 @@ module.exports.get_Contra = async(req, res) => {
 
 module.exports.find = async(req, res) => {
     try {
-        const nombre = 'lalo';
+        const nombre = req.body.nombre;
         const user = new model.Usuario();
         const usuarios = await user.find(nombre);
         if (usuarios.length === 0) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
         return res.status(200).json({ usuarios:usuarios });
+        res.render("./sign_in/sign_in_html");
     } catch(error) {
         console.error('Error:', error);
         return res.status(500).json({ error: 'Error al obtener el usuario' });
     }
 };
+
+module.exports.do_Login = async(req,res) => {
+    try {
+        const users = await model.Usuario.find(req.body.nombre);
+        const user = users[0];
+        const do_Match = (req.body.pass === user.pass);
+
+        if (!do_Match) {
+            return; 
+        }
+
+        //req.session.username = user.username;
+        //req.session.isLoggedIn = true;
+        res.render ("sign_in\sign_in_html", {
+            user:Usuario
+        });
+        
+    
+    }catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'No Jala' });
+    }
+
+}
