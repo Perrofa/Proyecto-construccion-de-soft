@@ -67,11 +67,12 @@ app.use('/appix', rutasAppix);
 const rutasUsuarios = require('./routes/usuarios.routes.js');
 app.use('/usuarios', rutasUsuarios);
 
-/*
+
 // carga de las rutas de proyectos
 const rutasProyectos = require('./routes/proyectos.routes');
 app.use('/proyectos', rutasProyectos);
 
+/*
 // carga de las rutas de la riesgos
 const rutasRiesgos = require('./routes/riesgos.routes');
 app.use('/riesgos', rutasRiesgos);

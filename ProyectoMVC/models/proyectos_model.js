@@ -13,11 +13,23 @@ exports.Proyecto = class {
             const connection = await db();
             const result = await connection.execute(
             `INSERT INTO proyecto (NomProyecto, DescProyecto, FInicioProyecto, FFinalProyecto) VALUES (?, ?, ?, ?)`,
-            [this.name, this.pass, this.mail, this.priv]
+            [this.name, this.desc, this.start, this.end]
             );
             await connection.release();
             return result;
         } catch (error) {
+            throw error;
+        }
+    }
+
+    async get() {
+        try {
+            const connection = await db();
+            const proyectos = await connection.execute('SELECT * FROM proyecto');
+            await connection.release();
+            return proyectos;
+        } catch(error) {
+            console.error(error);
             throw error;
         }
     }
