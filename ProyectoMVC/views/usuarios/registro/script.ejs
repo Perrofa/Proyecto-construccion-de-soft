@@ -40,37 +40,5 @@
         }
     });
 
-    document.getElementById("eliminar-usuario").addEventListener("click", function(event) {
-        if(flag2){
-            document.getElementById("eliminar-form").innerHTML = "";
-            this.textContent = "Eliminar usuario";
-            this.id = "eliminar-usuario";
-        } else {
-            document.getElementById("eliminar-form").innerHTML = `
-                <form action="/usuarios/registro" method="POST" id="registro-form">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre de usuario</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Nombre del usuario" name="nombre" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="pass" class="form-label">Contraseña</label>
-                        <input type="text" class="form-control" id="pass" placeholder="Contraseña del usuario" name="pass" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="mail" class="form-label">Correo</label>
-                        <input type="text" class="form-control" id="mail" placeholder="Correo del usuario" name="mail" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="priv" class="form-label">Privilegio</label>
-                        <input type="number" min="1" max="3" class="form-control" id="priv" placeholder="1-Admin   2-Desarrollador   3-Colaborador" name="priv" required>
-                    </div>
-                    <input class="btn btn-primary mb-3" type="submit" value="Registrar">
-                </form>
-            `;
-
-            this.textContent = "Cerrar eliminar usuario";
-            this.id = "ocultar-eliminar-usuario";
-        }
-        flag2 = !flag2;
-    });
+    
 </script>

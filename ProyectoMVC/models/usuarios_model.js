@@ -29,9 +29,10 @@ exports.Usuario = class {
             const connection = await db();
             const result = await connection.execute('Select * from usuario WHERE NomUsuario = ?', [nombre]);
             await connection.release();
+            console.log(result);
             return result;
         } catch (error) {
-            console.error('Error executing query:', error);
+            console.error(error);
             throw error; 
         }
     }
@@ -43,56 +44,21 @@ exports.Usuario = class {
             await connection.release();
             console.log(usuarios);
             return usuarios;
-        } catch {
-            console.error('Error executing query:', error);
+        } catch(error) {
+            console.error(error);
             throw error;
         }
     }
 
-    async get_NomUsuarios() {
+    async delete(id) {
         try {
             const connection = await db();
-            const usuarios = await connection.execute('SELECT NomUsuario FROM usuario');
+            await connection.execute('DELETE FROM usuario WHERE UserID = ?', [id]);
             await connection.release();
-            console.log(usuarios);
-            return usuarios;
-        } catch {
-            console.error('Error executing query:', error);
+        } catch(error) {
+            console.log(error);
             throw error;
         }
     }
 
-    async get_ContraUsuario() {
-        try {
-            const connection = await db();
-            const usuarios = await connection.execute('SELECT ContraUsuario FROM usuario');
-            await connection.release();
-            console.log(usuarios);
-            return usuarios;
-        } catch {
-            console.error('Error executing query:', error);
-            throw error;
-        }
-    }
-
-
 }
-
-/*
-const get = async() => {
-    try {
-        const connection = await db();
-        const [rows] = await connection.query('SELECT * FROM usuario');
-        const usuarios = rows.map(row => ({
-            id: row.UserID,
-            nombre: row.NomUsuario,
-            contra: row.ContraUsuario,
-            correo: row.MailUsuario,
-            priv: row.PrivUsuario
-        }));
-        return usuarios;
-    } catch (error) {
-        throw error;
-    }
-}
-*/

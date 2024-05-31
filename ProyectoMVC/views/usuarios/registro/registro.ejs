@@ -53,21 +53,23 @@
               <label for="mail" class="form-label">Correo</label>
               <input type="email" class="form-control" id="mail" placeholder="Correo del usuario" name="mail" required>
               <div class="form-group mb-3">
-                <label for="nivelRiesgo">Nivel:</label>
-                <select class="form-control mb-3" name="nivelRiesgo" required>
-                  <option value="" disabled selected>Selecciona un nivel de privilegio</option>
-                  <option value="1">1 (Administrador)</option>
-                  <option value="2">2 (Desarrollador)</option>
-                  <option value="3">3 (Colaborador)</option>
-                </select>
+                <label for="priv" class="form-label">Privilegio</label>
+                <input type="number" min="1" max="3" class="form-control" id="priv" placeholder="1-Admin 2-Desarrollador 3-Colaborador" name="priv" required>
               </div>
 
-              <input class="btn btn-primary mb-3" type="submit" value="Registrar">
+              <button class="btn btn-primary mb-3" type="submit">Registrar</button>
           </form>
           <button class="btn btn-secondary mb-3" type="button" id="ver-registro">Mostrar usuarios</button>
-          <button class="btn btn-secondary mb-3" type="button" id="eliminar-usuario">Eliminar usuario</button>
         </div>
-        <div id="eliminar-form"></div>
+        <div id="eliminar-form">
+          <form action="/usuarios/delete" method="POST" id="eliminar-form">
+            <div class="mb-3">
+                <label for="id" class="form-label">Eliminar usuario</label>
+                <input type="number" class="form-control" id="id" placeholder="ID del usuario" name="id" required>
+            </div>
+            <button class="btn btn-primary mb-3" type="submit">Eliminar</button>
+        </form>
+        </div>
         <div id="wrapper"></div>    
     </body>
     <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
