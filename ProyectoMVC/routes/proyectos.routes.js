@@ -7,6 +7,8 @@ const router = express.Router();
 const controller = require("../controllers/proyectos.controller.js");
 
 router.post('/registro', controller.post_registro);
+
 router.get('/proyectos', controller.get_proyectos);
+router.get('/encontrar', controller.find);
 
 module.exports = router;

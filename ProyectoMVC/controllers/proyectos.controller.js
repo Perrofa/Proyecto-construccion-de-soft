@@ -27,3 +27,15 @@ module.exports.get_proyectos = async(req, res) => {
         console.error('Error:', error);
     }
 };
+
+module.exports.find = async (req, res) => {
+    try {
+        const nombre = req.body.titulo;
+        const proyect = new model.Proyecto();
+        const findedProyect = await proyect.find(nombre);
+        return res.status(200).json({ id:findedProyect })
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "No jala el find" });
+    }
+}

@@ -37,9 +37,9 @@ exports.Proyecto = class {
     async find(nombre) {
         try {
             const connection = await db();
-            const result = await connection.execute('Select * from proyecto WHERE NomProyecto = ?', [nombre]);
+            const [rows] = await connection.execute('Select * from proyecto WHERE NomProyecto = ?', [nombre]);
             await connection.release();
-            return result;
+            return rows.length > 0 ? rows[0].id : null;
         } catch (error) {
             console.error('Error executing query:', error);
             throw error; 

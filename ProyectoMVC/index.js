@@ -72,11 +72,9 @@ app.use('/usuarios', rutasUsuarios);
 const rutasProyectos = require('./routes/proyectos.routes');
 app.use('/proyectos', rutasProyectos);
 
-/*
 // carga de las rutas de la riesgos
 const rutasRiesgos = require('./routes/riesgos.routes');
 app.use('/riesgos', rutasRiesgos);
-*/
 
 // apertura del servidor
 const server = http.createServer( (request, response) => {    
