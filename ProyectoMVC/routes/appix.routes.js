@@ -10,7 +10,7 @@ router.get('/sign_in', controller.sign_in);
 router.get('/inicio', controller.inicio);
 router.get('/perfil', controller.perfil);
 router.get('/proyectos', controller.proyectos);
-router.get('/riesgos', controller.riesgos);
+router.get('/registro', controller.registro);
 router.get('/ayuda', controller.ayuda);
 
 module.exports = router;

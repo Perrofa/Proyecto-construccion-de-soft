@@ -11,8 +11,8 @@ module.exports.perfil = async(req, res) =>{
 module.exports.proyectos = async(req, res) =>{
     res.render('./appix/proyectos_html')
 }
-module.exports.riesgos = async(req, res) =>{
-    res.render('./appix/riesgos_html')
+module.exports.registro = async(req, res) =>{
+    res.render('./appix/registro_html')
 }
 module.exports.ayuda = async(req, res) =>{
     res.render('./appix/ayuda_html')
