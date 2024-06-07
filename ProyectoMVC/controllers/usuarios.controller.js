@@ -126,7 +126,7 @@ module.exports.post_login = async(req,res) =>{
 }
 */
 
-app.post('/auth', async function(request, response) {
+/* app.post('/auth', async function(request, response) {
     // Capture the input fields
     let username = request.body.username;
     let password = request.body.password;
@@ -156,4 +156,4 @@ app.post('/auth', async function(request, response) {
     } else {
         response.send('Por favor ingresa Usuario y Contraseña!');
     }
-});
+}); */
