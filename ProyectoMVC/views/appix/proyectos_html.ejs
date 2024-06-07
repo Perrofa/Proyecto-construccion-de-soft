@@ -13,7 +13,8 @@
         <div class="container px-4 py-5" id="custom-cards">
           <h2 class="pb-2 border-bottom">Proyectos</h2>
       
-          <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+          <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5" id="grid">
+
             <div class="col">
               <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: rgba(0, 216, 0, 1) !important;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
@@ -35,50 +36,7 @@
                 </div>
               </div>
             </div>
-      
-            <div class="col">
-              <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: rgba(13,112,200,1) !important;">
-                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                  <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Proyecto 2</h3>
-                  <h5 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Req. Software</h5>
-                  <ul class="d-flex list-unstyled mt-auto">
-                    <li class="me-auto">
-                      <img src="/images/alertIcon.png" alt="Bootstrap" width="32" height="32">
-                    </li>
-                    <li class="d-flex align-items-center me-3">
-                      <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                      <small>Nivel de Riesgo: Medio</small>
-                    </li>
-                    <li class="d-flex align-items-center">
-                      <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                      <small>17/03/24</small>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-      
-            <div class="col">
-              <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: rgba(255, 138, 0, 1) !important;">
-                <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-                  <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Projecto 3</h3>
-                  <h5 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">MySQL Database</h5>
-                  <ul class="d-flex list-unstyled mt-auto">
-                    <li class="me-auto">
-                      <img src="/images/alertIcon.png" alt="Bootstrap" width="32" height="32">
-                    </li>
-                    <li class="d-flex align-items-center me-3">
-                      <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                      <small>Nivel de Riesgo: Alto</small>
-                    </li>
-                    <li class="d-flex align-items-center">
-                      <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                      <small>13/12/23</small>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -95,6 +53,48 @@
     <script>
       var elemento = document.getElementById('proyectos-link');
       elemento.className = 'nav-link active';
+
+      document.addEventListener('DOMContentLoaded', async () => {
+      const url = '/proyectos/proyectos';
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (res.ok) {
+        res.json().then((data) => {
+          const proyecto = data.proyectos;
+
+          const grid = proyecto.map((proyecto) => {
+            return `
+            <div class="col">
+              <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: rgba(0, 50, 200, 1) !important;">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                  <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Proyecto ${proyecto.ProyectoID}</h3>
+                  <h5 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${proyecto.NomProyecto}</h5>
+                  <ul class="d-flex list-unstyled mt-auto">
+                    <li class="me-auto">
+                      <img src="/images/alertIcon.png" width="32" height="32">
+                    </li>
+                    <li class="d-flex align-items-center me-3">
+                      <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+                      <small>Nivel de Riesgo: Bajo</small>
+                    </li>
+                    <li class="d-flex align-items-center">
+                      <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+                      <small>${proyecto.FInicioProyecto}</small>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            `;
+          }).join('');
+
+          document.getElementById('grid').innerHTML = grid;
+        });
+      }
+      })
     </script>
 
   </body>
