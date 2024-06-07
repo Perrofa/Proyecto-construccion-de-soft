@@ -8,36 +8,28 @@
       <%- include('./../sidebar.ejs') %>
 
       <!-- Cuadros de proyectos -->
-
       <div class="container">
         <div class="container px-4 py-5" id="custom-cards">
           <h2 class="pb-2 border-bottom">Proyectos</h2>
       
           <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5" id="grid">
-
-            <div class="col">
-              <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg bg-primary">
-                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                  <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Proyecto 1</h3>
-                  <h5 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Project Manager</h5>
-                  <ul class="d-flex list-unstyled mt-auto">
-                    <li class="me-auto">
-                      <img src="/images/alertIcon.png" width="32" height="32">
-                    </li>
-                    <li class="d-flex align-items-center me-3">
-                      <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                      <small>Nivel de Riesgo: Bajo</small>
-                    </li>
-                    <li class="d-flex align-items-center">
-                      <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                      <small>30/04/24</small>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
+            <!-- Project cards will be injected here -->
           </div>
+
+          <!-- Pagination Controls -->
+          <nav id="paginationControls" style="display: none;">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <button class="page-link" id="prevPage" disabled>Anterior</button>
+              </li>
+              <li class="page-item">
+                <span class="page-link" id="pageIndicator">1</span>
+              </li>
+              <li class="page-item">
+                <button class="page-link" id="nextPage">Siguiente</button>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </main>
@@ -51,30 +43,27 @@
     <%- include('./../script.ejs') %>
 
     <script>
-      var elemento = document.getElementById('proyectos-link');
-      elemento.className = 'nav-link active';
-
       document.addEventListener('DOMContentLoaded', async () => {
-      const url = '/proyectos/proyectos';
-      const res = await fetch(url, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      function formatearFecha(fecha) {
-        return new Date(fecha).toLocaleDateString('es-MX', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
+        const url = '/proyectos/proyectos';
+        const res = await fetch(url, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
         });
-      }
 
-      if (res.ok) {
-        res.json().then((data) => {
-          const proyecto = data.proyectos;
+        const projectsPerPage = 9;
+        let currentPage = 1;
+        let totalPages = 1;
 
-          const grid = proyecto.map((proyecto) => {
-            return `
+        function formatearFecha(fecha) {
+          return new Date(fecha).toLocaleDateString('es-MX', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+        }
+
+        function renderProjects(projects) {
+          const grid = projects.map(proyecto => `
             <div class="col">
               <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: rgba(0, 50, 200, 1) !important;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
@@ -94,14 +83,49 @@
                 </div>
               </div>
             </div>
-            `;
-          }).join('');
+          `).join('');
 
           document.getElementById('grid').innerHTML = grid;
-        });
-      }
-      })
-    </script>
+        }
 
+        function updatePaginationControls() {
+          document.getElementById('prevPage').disabled = currentPage === 1;
+          document.getElementById('nextPage').disabled = currentPage === totalPages;
+          document.getElementById('pageIndicator').textContent = currentPage;
+        }
+
+        function handlePageChange(newPage) {
+          currentPage = newPage;
+          const start = (currentPage - 1) * projectsPerPage;
+          const end = start + projectsPerPage;
+          renderProjects(allProjects.slice(start, end));
+          updatePaginationControls();
+        }
+
+        if (res.ok) {
+          const data = await res.json();
+          const allProjects = data.proyectos;
+          totalPages = Math.ceil(allProjects.length / projectsPerPage);
+
+          // Only show pagination controls if there are more than 9 projects
+          if (allProjects.length > projectsPerPage) {
+            document.getElementById('paginationControls').style.display = 'block';
+          }
+
+          handlePageChange(1); // Initial render of the first page
+
+          document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) handlePageChange(currentPage - 1);
+          });
+
+          document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage < totalPages) handlePageChange(currentPage + 1);
+          });
+        }
+      });
+
+      var elemento = document.getElementById('proyectos-link');
+      elemento.className = 'nav-link active';
+    </script>
   </body>
 </html>
