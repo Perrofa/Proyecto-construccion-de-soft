@@ -125,3 +125,35 @@ module.exports.post_login = async(req,res) =>{
     }        
 }
 */
+
+app.post('/auth', async function(request, response) {
+    // Capture the input fields
+    let username = request.body.username;
+    let password = request.body.password;
+    // Ensure the input fields exist and are not empty
+    if (username && password) {
+        try {
+            // Get a connection from the pool
+            const conn = await pool.getConnection();
+            // Execute SQL query that'll select the account from the database based on the specified username and password
+            const result = await conn.query('SELECT * FROM Usuario WHERE NomUsuario = ? AND ContraUsuario = ?', [username, password]);
+            // Release the connection back to the pool
+            conn.release();
+            // If the account exists
+            if (result.length > 0) {
+                // Authenticate the user
+                request.session.loggedin = true;
+                request.session.username = username;
+                // Redirect to home page
+                response.redirect('/home');
+            } else {
+                response.send('Usuario y/o Contraseña Incorrecta');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            response.send('Error de base de datos');
+        }
+    } else {
+        response.send('Por favor ingresa Usuario y Contraseña!');
+    }
+});
