@@ -8,7 +8,6 @@ const controller = require("../controllers/riesgos.controller.js");
 
 // rutas
 router.post('/registro', controller.post_registro);
-
-//router.get('/riesgos', controller.get_riesgos);
+router.get('/riesgos', controller.get_riesgos);
 
 module.exports = router;

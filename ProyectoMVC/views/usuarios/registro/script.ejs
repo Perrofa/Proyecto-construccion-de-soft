@@ -38,7 +38,13 @@
     });
 
     document.getElementById("eliminar-form").addEventListener("submit", function(event) {
-        alert("Usuario eliminado exitosamente");
+        event.preventDefault();
+        if(confirm('¿Estas seguro de que quieres eliminar el usuario?')) {
+            alert("Usuario eliminado exitosamente");
+            event.target.submit();
+        } else {
+            alert("Usuario NO eliminado");
+        }
     });
 
     

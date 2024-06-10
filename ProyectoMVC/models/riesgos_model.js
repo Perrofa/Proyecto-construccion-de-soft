@@ -25,7 +25,7 @@ exports.Riesgo = class {
     async get() {
         try {
             const connection = await db();
-            const proyectos = await connection.execute('SELECT * FROM proyecto');
+            const proyectos = await connection.execute('SELECT * FROM riesgo');
             await connection.release();
             return proyectos;
         } catch(error) {

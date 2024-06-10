@@ -18,11 +18,11 @@ module.exports.post_registro = async(req,res) =>{
     }
 }
 
-module.exports.get_proyectos = async(req, res) => {
+module.exports.get_riesgos = async(req, res) => {
     try {
-        const proyect = new model.Proyecto();
-        const proyectos = await proyect.get();
-        return res.status(200).json({ proyectos:proyectos });
+        const riesgo = new model.Riesgo();
+        const riesgos = await riesgo.get();
+        return res.status(200).json({ riesgos:riesgos });
     } catch(error) {
         console.error('Error:', error);
     }
