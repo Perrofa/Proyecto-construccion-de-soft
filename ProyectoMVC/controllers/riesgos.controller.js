@@ -38,3 +38,13 @@ module.exports.get_riesgos_por_proyecto = async (req, res) => {
         console.error('Error:', error);
     }
 };
+
+module.exports.get_riesgos_por_nivel = async (req, res) => {
+    try {
+        const riesgo = new model.Riesgo();
+        const riesgos = await riesgo.getByNivelRiesgo();
+        return res.status(200).json({ riesgos: riesgos });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};

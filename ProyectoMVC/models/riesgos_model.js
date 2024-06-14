@@ -45,4 +45,30 @@ exports.Riesgo = class {
             throw error;
         }
     }
+
+    async getByNivelRiesgo() {
+        try {
+            const connection = await db();
+            const riesgos = await connection.execute(`
+                SELECT 
+                    p.ProyectoID, 
+                    p.NomProyecto, 
+                    SUM(r.NivelRiesgo) AS SumaNivelRiesgo
+                FROM 
+                    Proyecto p
+                LEFT JOIN 
+                    Riesgo r ON p.ProyectoID = r.ProyectoID
+                GROUP BY 
+                    p.ProyectoID, 
+                    p.NomProyecto
+                ORDER BY
+                	SumaNivelRiesgo DESC;
+                `);
+            await connection.release();
+            return riesgos;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }
