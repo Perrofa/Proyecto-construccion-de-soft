@@ -1,83 +1,73 @@
-// librerias
-const http    = require('http');
+const http = require('http');
 const express = require('express');
-const path    = require('path');
-const fs      = require('fs');
-const app     = express();
+const path = require('path');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const mariadb = require('mariadb');
 
-// configuracion de ejs en el directiorio views
+const app = express();
+
+// Configuración de EJS
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-// configuracion de body-parser para middleware
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+// Configuración de body-parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // Asegura que también aceptas JSON
 
-// obtencion de los archivos estaticos en el directorio public
+// Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// cookies
-const cookieParser = require('cookie-parser');
+// Cookies y sesiones
 app.use(cookieParser());
-
-// sesiones
-const session = require('express-session');
 app.use(session({
-  secret: 'mi string secreto que debe ser un string aleatorio muy largo, no como éste', 
-  resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
-  saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
+  secret: 'mi string secreto que debe ser un string aleatorio muy largo, no como éste',
+  resave: false,
+  saveUninitialized: false,
 }));
 
-// interaccion con la base de datos
-const mariadb = require('mariadb');
+// Configuración de la base de datos
 const pool = mariadb.createPool({
-    host:"127.0.0.1",
-    user:"root",
-    password:"1234",
-    database:"appix",
-    connectionLimit:5
+  host: "127.0.0.1",
+  user: "root",
+  password: "1234",
+  database: "appix",
+  connectionLimit: 5,
 });
 
-app.get('/', (request, response, next) => {
-    response.setHeader('Content-Type', 'text/plain');
-    response.send("Hola Mundo");
-    response.end(); 
+// Prueba de conexión a la base de datos
+app.get('/test_db', async (req, res) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const rows = await conn.query("SELECT * FROM proyecto");
+    const jsonS = JSON.stringify(rows);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(jsonS);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Error en la base de datos");
+  } finally {
+    if (conn) conn.release();
+  }
 });
 
-app.get('/test_db', async(request, response, next) => {
-    let conn;
-
-    try{
-        conn = await pool.getConnection();
-        const rows = await conn.query("SELECT * FROM proyecto")
-        console.log(rows);
-        const jsonS = JSON.stringify(rows);
-        response.writeHead(200, {'Content-type':'text/html'});
-        response.end(jsonS);
-    }catch(e){
-        console.log(e)
-    }
-});
-
-// carga de las rutas de la aplicacion
+// Carga de rutas
 const rutasAppix = require('./routes/appix.routes.js');
 app.use('/appix', rutasAppix);
 
-// carga de las rutas de usuarios
 const rutasUsuarios = require('./routes/usuarios.routes.js');
 app.use('/usuarios', rutasUsuarios);
 
-
-// carga de las rutas de proyectos
 const rutasProyectos = require('./routes/proyectos.routes');
 app.use('/proyectos', rutasProyectos);
 
-// carga de las rutas de la riesgos
 const rutasRiesgos = require('./routes/riesgos.routes');
 app.use('/riesgos', rutasRiesgos);
 
-// apertura del servidor
-const server = http.createServer( (request, response) => {    
-    console.log(request.url);
+// Apertura del servidor
+app.listen(3000, () => {
+  console.log("Servidor escuchando en el puerto 3000");
 });
-app.listen(3000);
