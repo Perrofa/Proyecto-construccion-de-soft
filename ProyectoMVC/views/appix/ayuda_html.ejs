@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./../head.ejs') %>
+  <body>
+    <%- include('./../header.ejs') %>
+
+    <main class="d-flex flex-nowrap">
+      <%- include('./../sidebar.ejs') %>
+
+      <div class="container">
+        <div class="container px-4 py-5" id="custom-cards">
+          <h2 class="pb-2 border-bottom">Ayuda</h2>
+
+          <h2><strong>Como usar Appix Project Manager?</strong></h2>
+      
+          <p class="text-justify"><strong>Usuarios:</strong> Para ingresar, deberás iniciar sesión con tu usuario y contraseña. Siendo un colaborador o desarrollador, deberás pedir tu cuenta y contraseña a un administrador e iniciar sesión. Una vez hecho esto serás redireccionado a la interfaz de Inicio en la Aplicación Web.</p>
+          
+          <p class="text-justify"><strong>Navegar en Appix PM:</strong> A la izquierda de la página, existe una barra lateral con las opciones de interfaz. Podrás navegar entre ellas dando click en la que desees. Las interfaces son: Inicio, Proyectos, Registros, Ayuda, Cuenta.</p>
+          
+          <p class="text-justify"><strong>Inicio:</strong> La interfaz de inicio es fácil e intuitiva, presentando al usuario con un carrusel. Solo dispone de tres botones: 'Resumen', 'Por terminar', 'Estadísticas de Riesgo'. Estas tres opciones cuentan con una breve descripción de su uso.</p>
+          
+          <p class="text-justify"><strong>Proyectos:</strong> En la interfaz de proyectos podrás ver todos los proyectos registrados en forma de cajas que se despliegan al hacer click. Estas cajas mostrarán todos los datos de proyectos ya registrados, como descripción, nombre, ID, riesgos, fecha de inicio y fin, y autor. Existe un botón en la esquina superior derecha de “Buscar Proyecto” con el cual al ingresar el ID o nombre podrás encontrar el que buscas. La interfaz tiene paginación por si excedes más de 9 proyectos registrados.</p>
+          
+          <p class="text-justify"><strong>NOTA:</strong> Solo verás los proyectos si es que hay proyectos registrados.</p>
+          
+          <p class="text-justify"><strong>Registro:</strong> La interfaz Registro es para registrar riesgos y proyectos. Esta cuenta con un botón doble “Agregar Proyecto” y “Agregar Riesgo”. Al hacer click en cualquiera de los dos, se desplegarán los campos necesarios para registrar uno u otro y debajo un botón de “Registrar Proyecto” o “Agregar Riesgo”. Para agregar riesgos primero debes haber registrado el proyecto al que deseas agregarlo y ya podrás asignarle el ID del proyecto para que el riesgo se asigne al proyecto deseado. El nivel del riesgo determina en una escala del 1 al 3, el nivel de prioridad del riesgo, 3 siendo el más prioritario, 1 siendo no tan prioritario. En base a estos niveles, se asignará un nivel de Riesgo ya sea Alto, Medio, o Bajo por la página.</p>
+          
+          <p class="text-justify"><strong>Cuenta:</strong> Si eres administrador, podrás crear, eliminar, y asignar privilegios de usuarios. Esto se realiza desde -> Cuenta -> Registrar Usuario, aquí se te desplegarán todas las opciones de registro de usuario, asignación de privilegios, contraseña, etc. Al terminar de llenar las cajas de información, debes dar click en “Registrar Usuario” y este quedará en la base de datos de la app. Una vez registrado, tendrás acceso a su mail por el cual podrás compartirle su usuario y contraseña para entrar a Appix Project Manager.</p>
+          
+          <p class="text-justify">También si eres administrador desde esta misma interfaz podrás eliminar a un usuario que ya no esté trabajando para Appix.</p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container">
+        <%- include('./../footer.ejs') %>
+      </div>
+    
+        <!-- Funciones con ID para navegar entre las interfaces -->
+    
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+      <%- include('./../script.ejs') %>
+    
+      <script>
+        var elemento = document.getElementById('ayuda-link');
+        elemento.className = 'nav-link active';
+      </script>
+    
+    </body>
+    </html>
