@@ -10,13 +10,14 @@ async function obtenerNivelRiesgos(){
             throw new Error('Error')
         }
         const riesgos = await res.json();
-        return riesgos.riesgos;
+        return riesgos.riesgos[0];
     } catch (error) {
         console.error(error);
         return[];
     }
 }
 
+/*
 async function obtenerFechaLimite(){
     const url = '/proyectos/fechafinal';
     try {
@@ -32,6 +33,7 @@ async function obtenerFechaLimite(){
         return[];
     }
 }
+*/
 
 document.addEventListener('DOMContentLoaded', function() {
     const botonRiesgos = document.getElementById('MasRiesgo');
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const riesgos = await obtenerNivelRiesgos();
         this.textContent = `Proyecto: ${riesgos.NomProyecto}, Nivel Riesgo: ${riesgos.SumaNivelRiesgo}`;
     });
-
+    /*
     const botonLimite = document.getElementById('FechaLimite');
     botonLimite.addEventListener('click', async function(){
         alert('boton');
@@ -49,5 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
     botonReciente.addEventListener('click', async function(){
         alert('boton');
     });
+    */
 });
 </script>
