@@ -7,7 +7,9 @@ const router = express.Router();
 const controller = require("../controllers/riesgos.controller.js");
 
 // rutas
-router.post('/registro', controller.post_registro);
+router.post('/registro', controller.post_riesgos);
 router.get('/riesgos', controller.get_riesgos);
+
+router.get('/riesgos/:ProyectoID', controller.get_riesgos_por_proyecto)
 
 module.exports = router;

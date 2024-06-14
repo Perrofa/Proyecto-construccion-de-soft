@@ -33,4 +33,16 @@ exports.Riesgo = class {
             throw error;
         }
     }
+
+    async getByProyectoID(ID) {
+        try {
+            const connection = await db();
+            const riesgos = await connection.execute('SELECT * FROM riesgo WHERE ProyectoID = ?', [ID]);
+            await connection.release();
+            return riesgos;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }
