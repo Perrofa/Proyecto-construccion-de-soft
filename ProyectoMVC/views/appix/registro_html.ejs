@@ -1,86 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <%- include('./../head.ejs') %>
-</head>
-<body>
-    <%- include('./../header.ejs') %>
-
-    <main class="d-flex flex-nowrap">
-        <%- include('./../sidebar.ejs') %>
-
-        <div class="container">
-            <div class="container px-4 py-5" id="custom-cards">
-                <h2 class="pb-2 border-bottom">Registro</h2>
-
-                <!-- Botones para registrar -->
-                <div class="btn-group mb-3" role="group" aria-label="Toggle forms">
-                    <button type="button" class="btn btn-primary" id="showProjectForm">Registrar Proyecto</button>
-                    <button type="button" class="btn btn-secondary" id="showRiskForm">Agregar Riesgo</button>
-                </div>
-
-                <!-- Formulario para registrar proyecto -->
-                <div id="projectForm" class="collapse show">
-                    <form action="/proyectos/registro" method="POST" id="nuevo-proyecto-form">
-                        <!-- Formulario aquí -->
-                    </form>
-                </div>
-
-                <!-- Formulario para registrar riesgo -->
-                <div id="riskForm" class="collapse">
-                    <form action="/riesgos/registro" method="POST" id="nuevo-riesgo-form">
-                        <!-- Formulario aquí -->
-                    </form>
-                </div>
-
-                <!-- Contenedor de Proyectos -->
-                <div id="grid" class="row"></div>
-
-                <!-- Controles de Paginación -->
-                <div class="d-flex justify-content-between align-items-center">
-                    <button class="btn btn-primary" onclick="cambiarPagina('anterior')">Anterior</button>
-                    <span id="pagina">Página 1</span>
-                    <button class="btn btn-primary" onclick="cambiarPagina('siguiente')">Siguiente</button>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-        <script>
-            $(document).ready(function() {
-                $('#showProjectForm').on('click', function() {
-                    $('#projectForm').collapse('show');
-                    $('#riskForm').collapse('hide');
-                });
-
-                $('#showRiskForm').on('click', function() {
-                    $('#riskForm').collapse('show');
-                    $('#projectForm').collapse('hide');
-                });
-            });
-
-            var elemento = document.getElementById('riesgos-link');
-            elemento.className = 'nav-link active';
-
-            document.getElementById("nuevo-proyecto-form").addEventListener("submit", function(event) {
-                alert("Proyecto registrado exitosamente");
-            });
-
-            document.getElementById("nuevo-riesgo-form").addEventListener("submit", function(event) {
-                alert("Riesgo registrado exitosamente");
-            });
-        </script>
-    </main>
-
-    <div class="container">
-        <%- include('./../footer.ejs') %>
-    </div>
-
-    <%- include('./../script.ejs') %>
-</body>
-</html>
+	<html lang="en">
+	  <head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+		<%- include('./../head.ejs') %>
+	  </head>
+	  <body>
+		<%- include('./../header.ejs') %>
+		
+		<main class="d-flex flex-nowrap">
+		  <%- include('./../sidebar.ejs') %>
+		  
+		  <div class="container">
+			<div class="container px-4 py-5" id="custom-cards">
+			  <h2 class="pb-2 border-bottom">Registro</h2>
+	
+			  <!-- Buttons to toggle forms -->
+			  <div class="btn-group mb-3" role="group" aria-label="Toggle forms">
+				<button type="button" class="btn btn-primary" id="showProjectForm">Registrar Proyecto</button>
+				<button type="button" class="btn btn-secondary" id="showRiskForm">Agregar Riesgo</button>
+			  </div>
+			  
+			  <!-- Formulario para registrar proyecto -->
+			  <div id="projectForm" class="collapse show">
+				<form action="/proyectos/registro" method="POST" id="nuevo-proyecto-form">
+				  <div class="mb-3">
+					<label for="titulo" class="form-label">Nombre del proyecto</label>
+					<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Escribe el nombre del proyecto" required>
+				  </div>
+				  
+				  <div class="mb-3">
+					<label for="descripcion" class="form-label">Descripción del proyecto</label>
+					<textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Escribe una breve descripción del proyecto" required></textarea>
+				  </div>
+	
+				  <!-- Calendarios de Fecha Inicio-Fin -->
+				  <div class="mb-3">
+					<label for="inicio" class="form-label">Fecha de inicio</label>
+					<input type="date" class="form-control" id="inicio" name="inicio" required>
+				  </div>
+		  
+				  <div class="mb-3">
+					<label for="fin" class="form-label">Fecha final</label>
+					<input type="date" class="form-control" id="fin" name="fin" required>
+				  </div>
+				  
+				  <button type="submit" class="btn btn-primary">Agregar Proyecto</button>
+				</form>
+			  </div>
+			  
+			  <!-- Formulario para registrar riesgo -->
+			  <div id="riskForm" class="collapse">
+				<form action="/riesgos/registro" method="POST" id="nuevo-riesgo-form">
+				  <div class="form-group mb-3">
+					<label for="nombreRiesgo" class="mb-3">Nombre del Riesgo</label>
+					<input type="text" class="form-control" id="nombreRiesgo" name="nombreRiesgo" placeholder="Escribe el nombre del riesgo a registrar" required>
+				  </div>
+				  <div class="form-group mb-3">
+					<label for="descripcionRiesgo" class="mb-3">Descripción del Riesgo</label>
+					<textarea class="form-control" id="descripcionRiesgo" name="descripcionRiesgo" placeholder="Escribe una breve descripción del riesgo" required></textarea>
+				  </div>
+				  <div class="form-group mb-3">
+					<label for="nivelRiesgo" class="mb-3">Nivel</label>
+					<input type="number" min="1" max="3" class="form-control" id="nivelRiesgo" name="nivelRiesgo" placeholder="Escribe el nivel de riesgo 1, 2 o 3" required>
+				  </div>
+				  <div class="form-group mb-3">
+					<label for="IDRiesgo" class="mb-3">ID del proyecto</label>
+					<input type="number" class="form-control" id="IDRiesgo" name="IDRiesgo" placeholder="Escribe ID del proyecto para vincular este riesgo" required>
+				  </div>
+				  <button type="submit" class="btn btn-primary">Agregar Riesgo</button>
+				</form>
+			  </div>
+			</div>
+		  </div>
+		  
+		  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+		  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		  
+		  <script>
+			$(document).ready(function() {
+			  $('#showProjectForm').on('click', function() {
+				$('#projectForm').collapse('show');
+				$('#riskForm').collapse('hide');
+			  });
+	
+			  $('#showRiskForm').on('click', function() {
+				$('#riskForm').collapse('show');
+				$('#projectForm').collapse('hide');
+			  });
+			});
+	
+			var elemento = document.getElementById('riesgos-link');
+			elemento.className = 'nav-link active';
+	
+			document.getElementById("nuevo-proyecto-form").addEventListener("submit", function(event) {
+			  alert("Proyecto registrado exitosamente");
+			});
+	
+			document.getElementById("nuevo-riesgo-form").addEventListener("submit", function(event) {
+			  alert("Riesgo registrado exitosamente");
+			});
+		  </script>
+		</main>
+	
+		<div class="container">
+		  <%- include('./../footer.ejs') %>
+		</div>
+		
+		<%- include('./../script.ejs') %>
+	  </body>
+	</html>
