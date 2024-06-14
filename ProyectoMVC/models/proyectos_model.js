@@ -12,7 +12,7 @@ exports.Proyecto = class {
         try {
             const connection = await db();
             const result = await connection.execute(
-            `INSERT INTO proyecto (NomProyecto, DescProyecto, FInicioProyecto, FFinalProyecto) VALUES (?, ?, ?, ?)`,
+            `CALL NewProyecto(?, ?, ?, ?)`,
             [this.name, this.desc, this.start, this.end]
             );
             await connection.release();

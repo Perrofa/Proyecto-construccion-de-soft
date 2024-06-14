@@ -14,8 +14,8 @@ exports.Usuario = class {
         try {
             const connection = await db();
             const result = await connection.execute(
-            `INSERT INTO usuario (UserID, NomUsuario, ContraUsuario, MailUsuario, PrivUsuario) VALUES (?, ?, ?, ?, ?)`,
-            [this.id, this.name, this.pass, this.mail, this.priv]
+            `CALL NewUsuario(?, ?, ?, ?)`,
+            [this.name, this.pass, this.mail, this.priv]
             );
             await connection.release();
             return result;
