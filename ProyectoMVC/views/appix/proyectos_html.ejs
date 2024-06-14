@@ -36,4 +36,57 @@
     </script>
     <%- include('./script_proyectos.ejs') %>
   </body>
+  <script>
+    let currentPage = 1; // Página actual, inicializada en 1
+  
+    // Función para cargar proyectos según la página
+    async function cargarProyectos(page) {
+      try {
+        const res = await fetch(`/proyectos/proyectos?page=${page}`);
+        if (!res.ok) {
+          throw new Error('Error al cargar proyectos');
+        }
+        const data = await res.json();
+        mostrarProyectos(data.proyectos);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
+    // Función para mostrar proyectos en la interfaz
+    function mostrarProyectos(proyectos) {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = ''; // Limpiar el contenido anterior del grid
+      proyectos.forEach((proyecto) => {
+        // Renderizar proyecto en el grid
+        const proyectoHTML = `
+          <div class="col">
+            <!-- Contenido del proyecto aquí -->
+          </div>
+        `;
+        grid.innerHTML += proyectoHTML;
+      });
+    }
+  
+    // Manejar clic en botón de página anterior
+    document.getElementById('paginaAnterior').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        cargarProyectos(currentPage);
+      }
+    });
+  
+    // Manejar clic en botón de página siguiente
+    document.getElementById('paginaSiguiente').addEventListener('click', () => {
+      // Se debería verificar si hay más páginas disponibles
+      currentPage++;
+      cargarProyectos(currentPage);
+    });
+  
+    // Cargar proyectos de la página actual al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      cargarProyectos(currentPage);
+    });
+  </script>
+  
 </html>
