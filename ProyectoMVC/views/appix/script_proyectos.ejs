@@ -1,29 +1,26 @@
 <script>
-async function obtenerRiesgos(proyectoID) {
-    const url = `/riesgos/riesgos/${proyectoID}`;
-    try {
-        const res = await fetch(url, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        });
-        if (!res.ok) {
-            throw new Error('Error en la solicitud de riesgos');
-        }
-        const riesgos = await res.json();
-        return riesgos.riesgos;
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
-}
-
-
-document.addEventListener('DOMContentLoaded', async () => {
-	const url = '/proyectos/proyectos';
-	const res = await fetch(url, {
-		method: 'GET',
-		headers: { 'Content-Type': 'application/json' }
-	});
+	let proyectos = [];
+	let paginaActual = 1;
+	const proyectosPorPagina = 6;
+	
+	async function obtenerRiesgos(proyectoID) {
+		const url = `/riesgos/riesgos/${proyectoID}`;
+		try {
+			const res = await fetch(url, {
+				method: 'GET',
+				headers: { 'Content-Type': 'application/json' }
+			});
+			if (!res.ok) {
+				throw new Error('Error en la solicitud de riesgos');
+			}
+			const riesgos = await res.json();
+			return riesgos.riesgos;
+		} catch (error) {
+			console.error(error);
+			return [];
+		}
+	}
+	
 	function formatearFecha(fecha) {
 		return new Date(fecha).toLocaleDateString('es-MX', {
 			year: 'numeric',
@@ -31,59 +28,89 @@ document.addEventListener('DOMContentLoaded', async () => {
 			day: '2-digit'
 		});
 	}
-	if (res.ok) {
-		res.json().then((data) => {
-			const proyectos = data.proyectos;
-			const grid = proyectos.map((proyecto) => {
-				return `
-				<div class="col">
-					<div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: rgba(0, 50, 200, 1) !important;">
-						<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" id="c${proyecto.ProyectoID}">
-							<h1>${proyecto.NomProyecto}</h1>
-							<h6>Descripcion:</h6>
-							<p>${proyecto.DescProyecto}</p>
-							<ul class="d-flex list-unstyled mt-auto">
-								<li class="d-flex align-items-center me-3">
-									<svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-									<small>${formatearFecha(proyecto.FFinalProyecto)}</small>
-								</li>
-								<li class="d-flex align-items-center">
-									<svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-									<small>${formatearFecha(proyecto.FInicioProyecto)}</small>
-								</li>
-							</ul>
-							<button id="b${proyecto.ProyectoID}">Mostrar Riesgos:</button>
-						</div>
+	
+	function renderizarProyectos() {
+		const inicio = (paginaActual - 1) * proyectosPorPagina;
+		const fin = inicio + proyectosPorPagina;
+		const proyectosPagina = proyectos.slice(inicio, fin);
+		
+		const grid = proyectosPagina.map((proyecto) => {
+			return `
+			<div class="col">
+				<div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: rgba(0, 50, 200, 1) !important;">
+					<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" id="c${proyecto.ProyectoID}">
+						<h1>${proyecto.NomProyecto}</h1>
+						<h6>Descripcion:</h6>
+						<p>${proyecto.DescProyecto}</p>
+						<ul class="d-flex list-unstyled mt-auto">
+							<li class="d-flex align-items-center me-3">
+								<svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+								<small>${formatearFecha(proyecto.FFinalProyecto)}</small>
+							</li>
+							<li class="d-flex align-items-center">
+								<svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+								<small>${formatearFecha(proyecto.FInicioProyecto)}</small>
+							</li>
+						</ul>
+						<button id="b${proyecto.ProyectoID}">Mostrar Riesgos:</button>
 					</div>
 				</div>
-				`;
-			}).join('');
-			const contenedor = document.getElementById('grid');
-				contenedor.innerHTML = grid;
-			proyectos.forEach(proyecto => {
-				let flag = false;
-				let cont = 0;
-				document.getElementById(`b${proyecto.ProyectoID}`).addEventListener('click', async function() {
-					if (flag) {
-						this.textContent = 'Mostrar Riesgos:';
-						flag = !flag;
+			</div>
+			`;
+		}).join('');
+		
+		const contenedor = document.getElementById('grid');
+		contenedor.innerHTML = grid;
+	
+		proyectosPagina.forEach(proyecto => {
+			let flag = false;
+			let cont = 0;
+			document.getElementById(`b${proyecto.ProyectoID}`).addEventListener('click', async function() {
+				if (flag) {
+					this.textContent = 'Mostrar Riesgos:';
+					flag = !flag;
+				} else {
+					const riesgos = await obtenerRiesgos(proyecto.ProyectoID);
+					if (riesgos.length > 0) {
+						if (cont <= 0) {
+							var etiqueta = document.createElement("p");
+							etiqueta.textContent = `Riesgos: ${riesgos.map(r => r.NomRiesgo).join(', ')}`;
+							document.getElementById(`c${proyecto.ProyectoID}`).appendChild(etiqueta);
+							cont = 1;
+						}
 					} else {
-						const riesgos = await obtenerRiesgos(proyecto.ProyectoID);
-        				if (riesgos.length > 0) {
-							if (cont <= 0) {
-								var etiqueta = document.createElement("p");
-								etiqueta.textContent = `Riesgos: ${riesgos.map(r => r.NomRiesgo).join(', ')}`;
-								document.getElementById(`c${proyecto.ProyectoID}`).appendChild(etiqueta);
-								cont = 1;
-							}
-                    	} else {
-                    	    this.textContent = 'No hay riesgos';
-                    	}
-						flag = !flag;
+						this.textContent = 'No hay riesgos';
 					}
-				});
+					flag = !flag;
+				}
 			});
 		});
+	
+		document.getElementById('pagina').innerText = `Página ${paginaActual}`;
 	}
-});
-</script>
+	
+	document.addEventListener('DOMContentLoaded', async () => {
+		const url = '/proyectos/proyectos';
+		const res = await fetch(url, {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		});
+		if (res.ok) {
+			res.json().then((data) => {
+				proyectos = data.proyectos;
+				renderizarProyectos();
+			});
+		}
+	});
+	
+	function cambiarPagina(direccion) {
+		if (direccion === 'anterior' && paginaActual > 1) {
+			paginaActual--;
+			renderizarProyectos();
+		} else if (direccion === 'siguiente' && paginaActual * proyectosPorPagina < proyectos.length) {
+			paginaActual++;
+			renderizarProyectos();
+		}
+	}
+	</script>
+	
