@@ -7,7 +7,7 @@ async function obtenerRiesgos(proyectoID) {
             headers: { 'Content-Type': 'application/json' }
         });
         if (!res.ok) {
-            throw new Error('Error en la solicitud de riesgos');
+            throw new Error('Error');
         }
         const riesgos = await res.json();
         return riesgos.riesgos;

@@ -1,0 +1,53 @@
+<script>
+async function obtenerNivelRiesgos(){
+    const url = '/riesgos/NivelRiesgos';
+    try {
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        if (!res.ok) {
+            throw new Error('Error')
+        }
+        const riesgos = await res.json();
+        return riesgos.riesgos;
+    } catch (error) {
+        console.error(error);
+        return[];
+    }
+}
+
+async function obtenerFechaLimite(){
+    const url = '/proyectos/fechafinal';
+    try {
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        if (!res.ok) {
+            throw 
+        }
+    } catch (error) {
+        console.error(error);
+        return[];
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const botonRiesgos = document.getElementById('MasRiesgo');
+    botonRiesgos.addEventListener('click', async function() {
+        const riesgos = await obtenerNivelRiesgos();
+        this.textContent = `Proyecto: ${riesgos.NomProyecto}, Nivel Riesgo: ${riesgos.SumaNivelRiesgo}`;
+    });
+
+    const botonLimite = document.getElementById('FechaLimite');
+    botonLimite.addEventListener('click', async function(){
+
+    });
+
+    const botonReciente = document.getElementById('FechaReciente');
+    botonReciente.addEventListener('click', async function(){
+
+    });
+});
+</script>
