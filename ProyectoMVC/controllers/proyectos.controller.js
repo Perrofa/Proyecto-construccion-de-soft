@@ -50,6 +50,17 @@ module.exports.find = async (req, res) => {
         console.error(error);
         res.status(500).json({ message: "No jala el find" });
     }
+}
+
+module.exports.get_proyectos_por_final = async (req, res) => {
+    try {
+        const proyect = new model.Proyecto();
+        const final = await proyect.getByFechaFinal();
+        return res.status(200).json({ proyecto:final })
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "No jala UnU" });
+    }
 };
 
 

@@ -45,4 +45,26 @@ exports.Proyecto = class {
             throw error; 
         }
     }
+
+    async getByFechaFinal() {
+        try {
+            const connection = await db();
+            const proyectos = await connection.execute(`
+                SELECT 
+                    *
+                FROM 
+                    Proyecto
+                WHERE 
+                    FFinalProyecto >= CURDATE()
+                ORDER BY 
+                    FFinalProyecto ASC
+                LIMIT 1
+                `);
+            await connection.release();
+            return proyectos;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

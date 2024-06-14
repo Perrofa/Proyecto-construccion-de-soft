@@ -65,7 +65,7 @@ exports.Riesgo = class {
                 	SumaNivelRiesgo DESC;
                 `);
             await connection.release();
-            return riesgos;
+            return riesgos[0];
         } catch (error) {
             console.error(error);
             throw error;
