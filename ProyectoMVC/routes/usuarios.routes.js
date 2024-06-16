@@ -11,8 +11,8 @@ router.post('/registro', controller.post_registro);
 
 router.post('/delete', controller.delete);
 
-//router.get('/login', controller.do_Login);
-//router.post('/login', controller.post_login);
+router.get('/login', controller.get_login);
+router.post('/login', controller.post_login);
 
 router.get('/usuarios', controller.get_usuarios);
 router.get('/encontrar', controller.find);

@@ -63,97 +63,37 @@ module.exports.find = async(req, res) => {
 
 
 
-/* module.exports.do_Login = async(req,res) => {
-    try {
-        const usuario = new model.Usuario();
-        const users = await model.Usuario.find(req.body.nombre);
-        const user = users[0];
-        const do_Match = (req.body.pass === user.pass);
-
-        //if (!do_Match) {
-        //    return; 
-        //}
-
-        //req.session.username = user.username;
-        //req.session.isLoggedIn = true;
-        res.render("sign_in/sign_in_html");
-        
-    
-    }catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'No Jala' });
-    }
-
-} */
-
-/*
 module.exports.get_login = async(req,res) =>{
-    res.render("./registro",{registro: false});
+    res.render("./sign_in/sign_in_html");
 }
 
 module.exports.post_login = async(req,res) =>{
     try {
-        const usuarios = await model.User.findUser(req.body.username)
+        const Umodel = new model.Usuario()
+        const usuario = await Umodel.find(req.body.username)
 
-        if(usuarios.length < 1){
-            res.render("./registro",{
-                registro: false
-            });
+        if(usuario.length < 1){
+            res.render("./sign_in/sign_in_html");
             return;
         }
 
-        const usuario = usuarios[0];
-        const doMatch = await bcrypt.compare(req.body.password, usuario.password);
+        const usupas = usuario.ContraUsuario;
+        const paspas = req.body.password;
+        var doMatch = true;
 
+                    
+
+        if(usupas === paspas){doMatch = true;}
+        else {doMatch = false;}
+//
         if(!doMatch) {
-            res.render("./registro",{
-                registro: false
-            });
+            res.redirect('/appix/inicio');
             return;
-        }
-
-        req.session.username = usuario.username;
-        req.session.isLoggedIn = true;
-        res.render('./logged',{
-            user:usuario
-        });
+        } 
 
     }catch (error){
-        res.render("./registro",{
-            registro: false
-        });
+        console.error(error);
+        res.status(500).json({ message: "No jala" });
+        res.render("./sign_in/sign_in_html");
     }        
 }
-*/
-
-/* app.post('/auth', async function(request, response) {
-    // Capture the input fields
-    let username = request.body.username;
-    let password = request.body.password;
-    // Ensure the input fields exist and are not empty
-    if (username && password) {
-        try {
-            // Get a connection from the pool
-            const conn = await pool.getConnection();
-            // Execute SQL query that'll select the account from the database based on the specified username and password
-            const result = await conn.query('SELECT * FROM Usuario WHERE NomUsuario = ? AND ContraUsuario = ?', [username, password]);
-            // Release the connection back to the pool
-            conn.release();
-            // If the account exists
-            if (result.length > 0) {
-                // Authenticate the user
-                request.session.loggedin = true;
-                request.session.username = username;
-                // Redirect to home page
-                response.redirect('/home');
-            } else {
-                response.send('Usuario y/o Contraseña Incorrecta');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            response.send('Error de base de datos');
-        }
-    } else {
-        response.send('Por favor ingresa Usuario y Contraseña!');
-    }
-}); */
